@@ -1,5 +1,6 @@
 package com.awesome;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputProcessor
@@ -18,6 +19,16 @@ public class InputProcessor
 	return rawInput;
     }
     
+    public static void processInput()
+    {
+	processedInput = rawInput;
+	processedInput = Utils.removeSpace(processedInput);
+	processedInput = Utils.addOp(processedInput);
+	processedInput = Utils.addZero(processedInput);
+//	processedInput = Utils.replaceWithCharVariables(processedInput);
+	
+	
+    }
     public static String getProcessedInput()
     {
 	return processedInput;
@@ -28,8 +39,7 @@ public class InputProcessor
     public static void main(String[] args)
     {
        InputProcessor.inputRawStr();
-//       System.out.println(InputProcessor.getInputStr());
-       
+       processInput();
     }
 
 }

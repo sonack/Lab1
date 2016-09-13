@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 public class Expression
 {
-    private static String[] variables;
-    
-    
+   
     private ArrayList<Monomial> exp;
     public Expression()
     {
@@ -18,11 +16,7 @@ public class Expression
 	
     }
     
-    public static void setVariables(String[] variables)
-    {
-	Expression.variables = variables;
-    }
-    
+  
     
     public static void main(String[] args)
     {
