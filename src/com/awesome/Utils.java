@@ -1,7 +1,6 @@
 package com.awesome;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,15 +12,10 @@ import java.util.Set;
  */
 public class Utils
 {
-    private static ArrayList<String> pool = new ArrayList<String>();
+    private static ArrayList<String> pool = null;
+    private static Set<String> set = null;
     private static int variableCnt = 0;
-  
-    /**
-     * 
-     * @param v
-     * @return 
-     */
-     
+
     public static boolean isDigit(char c)
     {
 	return Character.isDigit(c);
@@ -32,6 +26,12 @@ public class Utils
 	return Character.isAlphabetic(c);
     }
     
+    public static boolean isOperator(char c)
+    {
+	if("+-*^".indexOf(c)==-1)
+	    return false;
+	return true;
+    }
     public static boolean isDouble(String s)
     {
 	boolean isdouble = true;
@@ -47,9 +47,15 @@ public class Utils
 	return isdouble;
     }
     
+    
+    public static boolean doubleEquals(double a,double b)
+    {
+	return Double.valueOf(a).equals(Double.valueOf(b));
+    }
+    
     public static boolean isVariable(String s)
     {
-	return s.matches("[A-Za-z]+");
+	return s.matches("^[A-Za-z_][A-Za-z0-9_]*$");	//变量名规则：字母\下划线开头，由数字、字母和下划线组成
     }
     
     public static String removeSpace(String s)
@@ -57,13 +63,13 @@ public class Utils
 	return s.replace(" ", "").replace("\t", "");
     }
     
-    public static String addOp(String s)
+    public static String addOperator(String s)
     {
 	StringBuffer sb = new StringBuffer();
 	sb.append(s);
 	for(int i=0;i<sb.length()-1;i++)
 	{
-	    if(isDigit(sb.charAt(i)) && isAlpha(sb.charAt(i+1)))
+	    if((isDigit(sb.charAt(i)) && isAlpha(sb.charAt(i+1))) || ( !isOperator(sb.charAt(i)) && sb.charAt(i+1) == '(' ))
 	    {
 		sb.insert(i+1, "*");
 	    }
@@ -71,57 +77,24 @@ public class Utils
 	return sb.toString();
     }
     
-    public static String[] splitVariables(String s)
+    public static void calcVariableCnt(String s)
     {
 	String[] ss;
-	String[] vs = new String[52];
 	ss = s.split("\\(|\\)|\\*|\\+|\\-|\\^");
-	Set<String> set = new HashSet<String>();
+	Set<String> deduplicate = new HashSet<String>();
+	set = new HashSet<String>();
+	pool = new ArrayList<String>();
 	for(String v : ss)
-	    set.add(v);
-	
-	for(String v : set)
-	{
-	    if(v.length() > 0  && isAlpha(v.charAt(0)))
-	    {
-		vs[variableCnt++] = v;
-	    }
-		
-	}
-	
-	return vs;
-    }
-    public static char transform2char(int id)
-    {
-	char ret = 0;
-	if(id < 26) ret = (char)('a'+id);
-	else if(id < 52) ret =  (char)('A'+id-26);
-	return ret;
+	    deduplicate.add(v);
+	for(String v : deduplicate)
+	    if(isVariable(v))
+		set.add(v);
+	variableCnt = set.size();
     }
     
-    public static int getVariableID(String v)
+    public static boolean isVariableAppear(String v)
     {
-	for(int i=0;i<pool.size();i++)
-	{
-	    if(pool.get(i).equals(v))
-	    {
-		return i;
-	    }
-	}
-	pool.add(v);
-	return pool.size()-1;
-    }
-    
-    
-    public static String addZero(String s)
-    {
-	s = s.replace("(+", "(0+").replace("(-", "(0-");
-	StringBuffer sb = new StringBuffer();
-	sb.append(s);
-	if(sb.charAt(0) == '+' || sb.charAt(0) == '-')
-	    sb.insert(0, "0");
-	return sb.toString();
-	
+	return set.contains(v);
     }
     
     public static int getVariableCnt()
@@ -129,15 +102,37 @@ public class Utils
 	return variableCnt;
     }
     
-    public static String replaceWithCharVariables(String s)
+    public static int getVariableID(String v)
     {
-	String[] vs = splitVariables(s);
-	for(int i=0;i<variableCnt;i++)
-	{
-	    System.out.println("Replace" + vs[i] + transform2char(getVariableID(vs[i]))+"" );
-	    s = s.replace(vs[i], transform2char(getVariableID(vs[i]))+"");
-	}
+	int pos = pool.indexOf(v);
+	if(pos != -1)	return pos; 
+	pool.add(v);
+	return pool.size()-1;
+    }
+    
+    public static String getVariableFromID(int id)
+    {
+	return pool.get(id);
+    }
+    
+    public static String addZero(String s)
+    {
+	s = s.replace("(+", "(0+").replace("(-", "(0-");
+	if(s.charAt(0) == '+' || s.charAt(0) == '-')
+	    s = "0" + s;
 	return s;
+    }
+
+    public static String shortDouble(double d)
+    {
+	if(doubleEquals(Math.round(d) - d,0))
+	    return String.valueOf((long)d);
+	return String.valueOf(d);
+    }
+    
+    public static String replaceVariableWithValue(String exp,String variable,String value)
+    {
+	return exp.replaceAll(variable, value+"");
     }
     
     public static void main(String[] args)
@@ -155,8 +150,16 @@ public class Utils
 //	
 //	System.out.println(Arrays.toString(splitVariables(sss)));
 //	System.out.println(addZero(sss));
-	
 	System.out.println("....." + isDouble("3.1s.23"));
+	System.out.println(isVariable("3a"));
+	System.out.println(isVariable("aaasd1a3_sad"));
+	System.out.println(isVariable("_asdasd1"));
+	System.out.println(isVariable("a1111"));
+	System.out.println(shortDouble(1.00));
+	System.out.println(shortDouble(1.001));
+	System.out.println(replaceVariableWithValue("a+b", "a", "3.1"));
+	System.out.println(isOperator('*'));
+	
     }
 
 }
