@@ -160,7 +160,6 @@ public class ExpressionTree
 	    }
 	    catch(Exception e)
 	    {
-		e.printStackTrace();
 		System.out.println("输入有误!");
 	    }
 	    if(!commandMode) 
