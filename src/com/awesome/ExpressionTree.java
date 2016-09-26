@@ -283,7 +283,7 @@ public class ExpressionTree
 	    }
 	    catch (Exception e)
 	    {
-		// e.printStackTrace();
+//		e.printStackTrace();
 		System.out.println("输入有误!"); // 输入不符合格式
 	    }
 	    if (!commandMode)

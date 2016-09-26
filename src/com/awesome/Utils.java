@@ -78,7 +78,7 @@ public class Utils
 	{
 	    // 数字和字母之间，非操作符和'('之间补*
 	    if ((isDigit(sb.charAt(i)) && (isAlpha(sb.charAt(i + 1)) || sb.charAt(i + 1) == '_'))
-		    || (!isOperator(sb.charAt(i)) && sb.charAt(i + 1) == '('))
+		    || ((!isOperator(sb.charAt(i)) && sb.charAt(i) != '(') && sb.charAt(i + 1) == '('))
 	    {
 		sb.insert(i + 1, "*");
 	    }
