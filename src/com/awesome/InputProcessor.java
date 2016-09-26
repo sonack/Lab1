@@ -62,8 +62,9 @@ public class InputProcessor
      */
     public static void main(String[] args)
     {
-	InputProcessor.inputRawExp();
-	preprocess();
-	System.out.println(processedExp);
+	ExpressionTree.main(args);
+//	InputProcessor.inputRawExp();
+//	preprocess();
+//	System.out.println(processedExp);
     }
 }

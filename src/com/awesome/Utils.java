@@ -148,6 +148,8 @@ public class Utils
      */
     public static void main(String[] args)
     {
+	ExpressionTree.main(args);
+	/*
 	System.out.println("*********************");
 	System.out.println((char) ('a' + 1));
 	// InputProcessor.inputRawStr();
@@ -170,5 +172,7 @@ public class Utils
 	String resultStr = instantStr.replaceAll("(\\d{2}):\\d{2}$", ":034$1");
 	System.out.println(resultStr);
 	System.out.println(Arrays.toString("a b	c".split(" |\\t")));
+	*/
+	
     }
 }
