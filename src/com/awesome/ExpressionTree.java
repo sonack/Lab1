@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 /* 为了完成实验三而作的一点修改，请无视*/
 /* 为了实验三做的第一个修改*/
+/*B1上的第二个修改*/
 class Node
 {
     String data;
