@@ -19,10 +19,14 @@ import java.util.Arrays;
  */
 /* 为了实验三做的第二个修改*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*B1上的第一个修改*/
 =======
 /*C4上的第一个修改*/
 >>>>>>> C4
+=======
+/*B2上的第一个修改*/
+>>>>>>> B2
 public class Expression
 {
 

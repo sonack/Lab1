@@ -10,10 +10,14 @@ import java.util.Scanner;
  */
 /* 为了实验三做的第三个修改*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*B1上的第三个修改*/
 =======
 /*C4上的第三个修改*/
 >>>>>>> C4
+=======
+/*B2上的第三个修改*/
+>>>>>>> B2
 public class InputProcessor
 {
     private static String rawExp;
