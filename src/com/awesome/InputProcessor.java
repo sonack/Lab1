@@ -9,7 +9,11 @@ import java.util.Scanner;
  *
  */
 /* 为了实验三做的第三个修改*/
+<<<<<<< HEAD
 /*B1上的第三个修改*/
+=======
+/*C4上的第三个修改*/
+>>>>>>> C4
 public class InputProcessor
 {
     private static String rawExp;
