@@ -9,6 +9,14 @@ import java.util.Set;
  * 
  * @author snk Utils 实用工具类，包含一些静态的工具性质的方法
  */
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/*B1上的第四个修改*/
+=======
+/*C4上的第四个修改*/
+>>>>>>> C4
+>>>>>>> origin/1143710310
 public class Utils
 {
     private static ArrayList<String> pool = null; // 变量hash内存池，保存着所有当前出现过的变量
@@ -178,6 +186,7 @@ public class Utils
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 修改四个文件，不同修改
 =======
 修改四个文件
@@ -185,3 +194,5 @@ public class Utils
 =======
 修改三个文件 on B2
 >>>>>>> B2
+=======
+>>>>>>> origin/1143710310

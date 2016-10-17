@@ -8,6 +8,19 @@ import java.util.Scanner;
  * @author snk
  *
  */
+<<<<<<< HEAD
+=======
+/* 为了实验三做的第三个修改*/
+<<<<<<< HEAD
+<<<<<<< HEAD
+/*B1上的第三个修改*/
+=======
+/*C4上的第三个修改*/
+>>>>>>> C4
+=======
+/*B2上的第三个修改*/
+>>>>>>> B2
+>>>>>>> origin/1143710310
 public class InputProcessor
 {
     private static String rawExp;
@@ -70,6 +83,7 @@ public class InputProcessor
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 修改四个文件，不同修改
 =======
 修改四个文件
@@ -77,3 +91,5 @@ public class InputProcessor
 =======
 修改三个文件 on B2
 >>>>>>> B2
+=======
+>>>>>>> origin/1143710310

@@ -17,6 +17,19 @@ import java.util.Arrays;
  * Expression 多项式表达式类
  * 若干个单项式由+号连接而成
  */
+<<<<<<< HEAD
+=======
+/* 为了实验三做的第二个修改*/
+<<<<<<< HEAD
+<<<<<<< HEAD
+/*B1上的第一个修改*/
+=======
+/*C4上的第一个修改*/
+>>>>>>> C4
+=======
+/*B2上的第一个修改*/
+>>>>>>> B2
+>>>>>>> origin/1143710310
 public class Expression
 {
 
@@ -256,4 +269,8 @@ class Monomial
 	if(first && Utils.doubleEquals(Math.abs(C), 1.0)) sb.append(Utils.shortDouble(Math.abs(C)));	//如果只有一个1,则不该省略1,进行纠正
 	return sb.toString();
     }
+<<<<<<< HEAD
 }修改Expression.java
+=======
+}
+>>>>>>> origin/1143710310
