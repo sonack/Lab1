@@ -9,6 +9,7 @@ import java.util.Set;
  * 
  * @author snk Utils 实用工具类，包含一些静态的工具性质的方法
  */
+/*C4上的第四个修改*/
 public class Utils
 {
     private static ArrayList<String> pool = null; // 变量hash内存池，保存着所有当前出现过的变量

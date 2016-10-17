@@ -18,6 +18,7 @@ import java.util.Arrays;
  * 若干个单项式由+号连接而成
  */
 /* 为了实验三做的第二个修改*/
+/*C4上的第一个修改*/
 public class Expression
 {
 
