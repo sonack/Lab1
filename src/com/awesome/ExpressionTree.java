@@ -7,6 +7,8 @@ import java.util.Arrays;
  *         data是该节点数据，对于叶节点是变量名或者数字，内部节点是操作符(+、-、*、^)，括号用来构造树结构
  * 
  */
+
+/* 为了完成实验三而作的一点修改，请无视*/
 class Node
 {
     String data;
