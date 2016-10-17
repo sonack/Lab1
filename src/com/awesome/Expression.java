@@ -17,6 +17,7 @@ import java.util.Arrays;
  * Expression 多项式表达式类
  * 若干个单项式由+号连接而成
  */
+/* 为了实验三做的第二个修改*/
 public class Expression
 {
 
