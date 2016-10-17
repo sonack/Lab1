@@ -9,3 +9,4 @@ GROUP NAME：good good eat, day day fat!
   3. 表达式中变量支持标准JAVA变量命名规范（以字母或'\_'开头，由字母、数字和'\_'组成，长度无限制）
   4. 当前版本：v1.2
 
+修改README.md
