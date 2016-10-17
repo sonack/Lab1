@@ -10,4 +10,8 @@ GROUP NAME：good good eat, day day fat!
   4. 当前版本：v1.2
 
 修改README.md
+<<<<<<< HEAD
 修改README.md，不同修改
+=======
+修改README.md
+>>>>>>> C4
