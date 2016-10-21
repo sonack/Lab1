@@ -10,6 +10,7 @@ import java.util.Arrays;
 class Node
 {
     String data;
+    
     Node l, r;
 
     Node()

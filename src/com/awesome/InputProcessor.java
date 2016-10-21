@@ -15,6 +15,7 @@ public class InputProcessor
     private static Scanner in = new Scanner(System.in);
 
     /**
+     * 
      * 输入原始字符串
      */
     public static void inputRawExp()
