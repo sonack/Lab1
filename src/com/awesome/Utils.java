@@ -133,7 +133,11 @@ public class Utils
 	    s = "0" + s;
 	return s;
     }
-
+/*此处缺少javadoc*/
+    /*
+     * 
+     * 如果d小数部分为0，则显示为整数形式，否则显示为小数形式，这样更为美观简洁
+     */
     public static String shortDouble(double d) // 如果d小数部分为0，则显示为整数形式，否则显示为小数形式，这样更为美观简洁
     {
 	if (doubleEquals(Math.round(d) - d, 0))
