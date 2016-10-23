@@ -257,4 +257,4 @@ class Monomial
 	if(first && Utils.doubleEquals(Math.abs(C), 1.0)) sb.append(Utils.shortDouble(Math.abs(C)));	//如果只有一个1,则不该省略1,进行纠正
 	return sb.toString();
     }
-}修改Expression.java
+}
