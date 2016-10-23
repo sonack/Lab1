@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 /**
  * 
+ * 
+ * 
  * 输入预处理类，整合包装Utils类的相关方法
  * @author snk
  *
@@ -15,8 +17,14 @@ public class InputProcessor
     private static Scanner in = new Scanner(System.in);
 
     /**
+     *  * 
+     *
      * 输入原始字符串
      */
+    
+    
+    
+    
     public static void inputRawExp()
     {
 	System.out.print("> ");
