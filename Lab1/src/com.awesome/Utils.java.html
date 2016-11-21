@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Utils.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestSimplify (2016-11-21 20:12:05)</a> &gt; <a href="../../index.html" class="el_group">Lab1</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">com.awesome</a> &gt; <span class="el_source">Utils.java</span></div><h1>Utils.java</h1><pre class="source lang-java linenums">package com.awesome;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * 
+ * @author snk Utils 实用工具类，包含一些静态的工具性质的方法
+ */
+<span class="nc" id="L12">public class Utils</span>
+{
+<span class="fc" id="L14">    private static ArrayList&lt;String&gt; pool = null; // 变量hash内存池，保存着所有当前出现过的变量</span>
+<span class="fc" id="L15">    private static Set&lt;String&gt; set = null; // 保存变量集合</span>
+<span class="fc" id="L16">    private static int variableCnt = 0; // 变量个数</span>
+
+<span class="fc" id="L18">    private static String[] assignMap; // 赋值映射表，采用同样的hash</span>
+
+    public static String[] getAssignMap()
+    {
+<span class="nc" id="L22">	return assignMap;</span>
+    }
+
+    public static boolean isDigit(char c) // 是否为数字字符
+    {
+<span class="nc" id="L27">	return Character.isDigit(c);</span>
+    }
+
+    public static boolean isAlpha(char c) // 是否为字母字符
+    {
+<span class="nc" id="L32">	return Character.isAlphabetic(c);</span>
+    }
+
+    public static boolean isOperator(char c) // 是否为操作符
+    {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">	if (&quot;+-*^&quot;.indexOf(c) == -1)</span>
+<span class="nc" id="L38">	    return false;</span>
+<span class="nc" id="L39">	return true;</span>
+    }
+
+    public static boolean isDouble(String s) // 是否是double
+    {
+<span class="fc" id="L44">	boolean isdouble = true;</span>
+	try
+	{
+<span class="fc" id="L47">	    Double ds = Double.parseDouble(s);</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">	    if (ds instanceof Double == false)</span>
+<span class="nc" id="L49">		isdouble = false;</span>
+<span class="nc" id="L50">	}</span>
+<span class="fc" id="L51">	catch (NumberFormatException e)</span>
+	{
+<span class="fc" id="L53">	    isdouble = false;</span>
+	}
+<span class="fc" id="L55">	return isdouble;</span>
+    }
+
+    public static boolean doubleEquals(double a, double b) // double比较相等，调用内置比较函数，会将其转化为longBits再比较，避免浮点误差
+    {
+<span class="fc" id="L60">	return Double.valueOf(a).equals(Double.valueOf(b));</span>
+    }
+
+    public static boolean isVariable(String s) // 判断是否是变量
+    {
+<span class="fc" id="L65">	return s.matches(&quot;^[A-Za-z_][A-Za-z0-9_]*$&quot;); // 变量名规则：字母\下划线开头，由数字、字母和下划线组成</span>
+    }
+
+    public static String removeSpace(String s) // 去掉多余空格和制表符
+    {
+<span class="nc" id="L70">	return s.replace(&quot; &quot;, &quot;&quot;).replace(&quot;\t&quot;, &quot;&quot;);</span>
+    }
+
+    public static String addOperator(String s) // 将省略的*号补回来
+    {
+<span class="nc" id="L75">	StringBuffer sb = new StringBuffer();</span>
+<span class="nc" id="L76">	sb.append(s);</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">	for (int i = 0; i &lt; sb.length() - 1; i++)</span>
+	{
+	    // 数字和字母之间，非操作符和'('之间补*
+<span class="nc bnc" id="L80" title="All 6 branches missed.">	    if ((isDigit(sb.charAt(i)) &amp;&amp; (isAlpha(sb.charAt(i + 1)) || sb.charAt(i + 1) == '_'))</span>
+<span class="nc bnc" id="L81" title="All 6 branches missed.">		    || ((!isOperator(sb.charAt(i)) &amp;&amp; sb.charAt(i) != '(') &amp;&amp; sb.charAt(i + 1) == '('))</span>
+	    {
+<span class="nc" id="L83">		sb.insert(i + 1, &quot;*&quot;);</span>
+	    }
+	}
+<span class="nc" id="L86">	return sb.toString();</span>
+    }
+
+    public static void calcVariableCnt(String s) // 计算变量个数
+    {
+	String[] ss;
+<span class="fc" id="L92">	ss = s.split(&quot;\\(|\\)|\\*|\\+|\\-|\\^&quot;); // 根据操作符分割字符串，注意转义</span>
+<span class="fc" id="L93">	Set&lt;String&gt; deduplicate = new HashSet&lt;String&gt;();</span>
+<span class="fc" id="L94">	set = new HashSet&lt;String&gt;();</span>
+<span class="fc" id="L95">	pool = new ArrayList&lt;String&gt;();</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">	for (String v : ss) // 去重</span>
+<span class="fc" id="L97">	    deduplicate.add(v);</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">	for (String v : deduplicate)</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">	    if (isVariable(v)) // 加入变量</span>
+<span class="fc" id="L100">		set.add(v);</span>
+<span class="fc" id="L101">	variableCnt = set.size(); // 计算变量个数</span>
+<span class="fc" id="L102">	assignMap = new String[variableCnt]; // 赋值</span>
+<span class="fc" id="L103">    }</span>
+
+    public static boolean isVariableAppear(String v) // 变量是否出现过
+    {
+<span class="nc" id="L107">	return set.contains(v);</span>
+    }
+
+    public static int getVariableCnt()
+    {
+<span class="fc" id="L112">	return variableCnt;</span>
+    }
+
+    public static int getVariableID(String v) // 获取变量hash值，即Monomial类的times数组的对应的下标位置
+    {
+<span class="fc" id="L117">	int pos = pool.indexOf(v); // 如果存在，直接返回变量在pool池中的下标作为hash值</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">	if (pos != -1)</span>
+<span class="fc" id="L119">	    return pos;</span>
+<span class="fc" id="L120">	pool.add(v); // 否则，将变量放入pool池中，返回下标</span>
+<span class="fc" id="L121">	return pool.size() - 1;</span>
+    }
+
+    public static String getVariableFromID(int id) // 根据变量的hash值，获得变量名
+    {
+<span class="fc" id="L126">	return pool.get(id);</span>
+    }
+
+    public static String addZero(String s) // 加0,将正号+v和负号-v，处理成0+v和0-v，即将正负号转变为加减法，便于处理
+    {
+<span class="nc" id="L131">	s = s.replace(&quot;(+&quot;, &quot;(0+&quot;).replace(&quot;(-&quot;, &quot;(0-&quot;);</span>
+<span class="nc bnc" id="L132" title="All 4 branches missed.">	if (s.charAt(0) == '+' || s.charAt(0) == '-')</span>
+<span class="nc" id="L133">	    s = &quot;0&quot; + s;</span>
+<span class="nc" id="L134">	return s;</span>
+    }
+/*此处缺少javadoc*/
+    /*
+     * 
+     * 如果d小数部分为0，则显示为整数形式，否则显示为小数形式，这样更为美观简洁
+     */
+    public static String shortDouble(double d) // 如果d小数部分为0，则显示为整数形式，否则显示为小数形式，这样更为美观简洁
+    {
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">	if (doubleEquals(Math.round(d) - d, 0))</span>
+<span class="fc" id="L144">	    return String.valueOf((long) d);</span>
+<span class="nc" id="L145">	return String.valueOf(d);</span>
+    }
+
+    
+    
+    
+    
+    
+    
+    /**
+     * 单元测试 测试工具函数
+     * 
+     * @param args
+     */
+    public static void main(String[] args)
+    {
+<span class="nc" id="L161">	ExpressionTree.main(args);</span>
+	/*
+	System.out.println(&quot;*********************&quot;);
+	System.out.println((char) ('a' + 1));
+	// InputProcessor.inputRawStr();
+	// System.out.println(removeSpace(InputProcessor.getRawStr()));
+	// System.out.println(addOp(removeSpace(InputProcessor.getRawStr())));
+	// String sss = addOp(removeSpace(InputProcessor.getRawStr()));
+	//
+	// System.out.println(Arrays.toString(splitVariables(sss)));
+	// System.out.println(addZero(sss));
+	System.out.println(&quot;.....&quot; + isDouble(&quot;3.1s.23&quot;));
+	System.out.println(isVariable(&quot;3a&quot;));
+	System.out.println(isVariable(&quot;aaasd1a3_sad&quot;));
+	System.out.println(isVariable(&quot;_asdasd1&quot;));
+	System.out.println(isVariable(&quot;a1111&quot;));
+	System.out.println(shortDouble(1.00));
+	System.out.println(shortDouble(1.001));
+	System.out.println(isOperator('*'));
+
+	String instantStr = &quot;20:33:24:34&quot;;
+	String resultStr = instantStr.replaceAll(&quot;(\\d{2}):\\d{2}$&quot;, &quot;:034$1&quot;);
+	System.out.println(resultStr);
+	System.out.println(Arrays.toString(&quot;a b	c&quot;.split(&quot; |\\t&quot;)));
+	*/
+	
+<span class="nc" id="L187">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>TestSimplify (2016-11-21 20:12:05)</div></body></html>
