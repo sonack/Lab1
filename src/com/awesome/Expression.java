@@ -128,6 +128,7 @@ public class Expression
 	return expression;
     }
     
+    
     @Override
     public String toString()			//输出表达式
     {
@@ -228,6 +229,7 @@ class Monomial
 	}
 	else
 	{
+		System.out.println(times[id]);
 	    monomial.C = 0;
 	}
 	return monomial;

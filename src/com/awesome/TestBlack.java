@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.awesome.Expression;
 
-public class TestSimplify {
+public class TestBlack {
     
     private Expression expression;
     @Before

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>TestBlack.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestWhite (2016-11-21 21:46:45)</a> &gt; <a href="../../index.html" class="el_group">Lab1</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">com.awesome</a> &gt; <span class="el_source">TestBlack.java</span></div><h1>TestBlack.java</h1><pre class="source lang-java linenums">package com.awesome;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.awesome.Expression;
+
+<span class="nc" id="L10">public class TestBlack {</span>
+    
+    private Expression expression;
+    @Before
+    public void setUp() throws Exception {
+   
+    	
+<span class="nc" id="L17">    }</span>
+    
+    @Test
+    public void testMonomial1() {
+    	
+<span class="nc" id="L22">    	Utils.calcVariableCnt(&quot;2*a*b&quot;);</span>
+<span class="nc" id="L23">    	Monomial m1 = new Monomial(&quot;2&quot;);</span>
+<span class="nc" id="L24">    	Monomial m2 = new Monomial(&quot;a&quot;);</span>
+<span class="nc" id="L25">    	Monomial m3 = new Monomial(&quot;b&quot;);</span>
+<span class="nc" id="L26">    	expression = new Expression(m1.multiply(m2).multiply(m3));</span>
+    	
+    	
+<span class="nc" id="L29">    	Utils.calcVariableCnt(&quot;2*a*b&quot;);</span>
+<span class="nc" id="L30">    	Monomial mm1 = new Monomial(&quot;2&quot;);</span>
+<span class="nc" id="L31">    	Monomial mm2 = new Monomial(&quot;a&quot;);</span>
+<span class="nc" id="L32">    	Monomial mm3 = new Monomial(&quot;b&quot;);</span>
+<span class="nc" id="L33">    	Expression expected = new Expression(m1.multiply(m2).multiply(m3));</span>
+<span class="nc" id="L34">    	Expression actual = expression.simplify();</span>
+<span class="nc" id="L35">    	assertEquals(expected.toString(), actual.toString());</span>
+<span class="nc" id="L36">    }</span>
+    
+    @Test
+    public void testMonomial2() {
+    	
+    	
+<span class="nc" id="L42">    	Utils.calcVariableCnt(&quot;2*a*b+3*a*b+0*b*c&quot;);</span>
+    	
+<span class="nc" id="L44">    	Monomial m0 = new Monomial(&quot;0&quot;);</span>
+<span class="nc" id="L45">    	Monomial m1 = new Monomial(&quot;2&quot;);</span>
+<span class="nc" id="L46">    	Monomial m2 = new Monomial(&quot;3&quot;); </span>
+<span class="nc" id="L47">    	Monomial m3 = new Monomial(&quot;a&quot;);</span>
+<span class="nc" id="L48">    	Monomial m4 = new Monomial(&quot;b&quot;);</span>
+<span class="nc" id="L49">    	Monomial m5 = new Monomial(&quot;c&quot;);</span>
+    	
+    
+<span class="nc" id="L52">    	expression = new Expression(m1.multiply(m3).multiply(m4));</span>
+<span class="nc" id="L53">    	expression.addMonomial(m2.multiply(m3).multiply(m4));</span>
+<span class="nc" id="L54">    	expression.addMonomial(m0.multiply(m4).multiply(m5));</span>
+    	
+    	
+    	
+    	
+<span class="nc" id="L59">    	Monomial mm0 = new Monomial(&quot;5&quot;); </span>
+<span class="nc" id="L60">    	Monomial mm1 = new Monomial(&quot;a&quot;);</span>
+<span class="nc" id="L61">    	Monomial mm2 = new Monomial(&quot;b&quot;);</span>
+    	
+<span class="nc" id="L63">    	Expression expected = new Expression(mm0.multiply(mm1).multiply(mm2));</span>
+<span class="nc" id="L64">    	Expression actual = expression.simplify();</span>
+<span class="nc" id="L65">    	assertEquals(expected.toString(), actual.toString());</span>
+<span class="nc" id="L66">    }</span>
+    
+    
+    @Test
+    public void testMonomial3() {
+    	
+    	
+<span class="nc" id="L73">    	 Utils.calcVariableCnt(&quot;2*a*b+3*a*b+0*b*c&quot;);</span>
+         
+<span class="nc" id="L75">         Monomial m0 = new Monomial(&quot;2&quot;);</span>
+<span class="nc" id="L76">         Monomial m1 = new Monomial(&quot;3&quot;);</span>
+<span class="nc" id="L77">         Monomial m2 = new Monomial(&quot;4&quot;); </span>
+<span class="nc" id="L78">         Monomial m3 = new Monomial(&quot;a&quot;);</span>
+<span class="nc" id="L79">         Monomial m4 = new Monomial(&quot;b&quot;);</span>
+<span class="nc" id="L80">         Monomial m5 = new Monomial(&quot;c&quot;);</span>
+<span class="nc" id="L81">         Monomial m6 = new Monomial(&quot;-1&quot;);</span>
+         
+     
+<span class="nc" id="L84">         expression = new Expression(m0.multiply(m3).multiply(m4).multiply(m5));</span>
+<span class="nc" id="L85">         expression.addMonomial(m6.multiply(m3).multiply(m4).multiply(m5));</span>
+<span class="nc" id="L86">         expression.addMonomial(m6.multiply(m3).multiply(m4).multiply(m5));</span>
+<span class="nc" id="L87">         expression.addMonomial(m2.multiply(m4).multiply(m5));</span>
+<span class="nc" id="L88">         expression.addMonomial(m1.multiply(m4).multiply(m5));</span>
+         
+         
+        
+<span class="nc" id="L92">        Monomial mm0 = new Monomial(&quot;7&quot;); </span>
+<span class="nc" id="L93">        Monomial mm1 = new Monomial(&quot;b&quot;);</span>
+<span class="nc" id="L94">        Monomial mm2 = new Monomial(&quot;c&quot;);</span>
+        
+<span class="nc" id="L96">        Expression expected = new Expression(mm0.multiply(mm1).multiply(mm2));</span>
+<span class="nc" id="L97">        Expression actual = expression.simplify();</span>
+<span class="nc" id="L98">        assertEquals(expected.toString(), actual.toString());</span>
+<span class="nc" id="L99">    }</span>
+    
+    
+    @Test
+    public void testMonomial4() {
+    	
+    	
+<span class="nc" id="L106">    	Utils.calcVariableCnt(&quot;&quot;);</span>
+<span class="nc" id="L107">    	expression = new Expression();</span>
+ 
+    	
+<span class="nc" id="L110">    	Utils.calcVariableCnt(&quot;0&quot;);</span>
+<span class="nc" id="L111">    	Expression expected = new Expression(new Monomial(&quot;0&quot;));</span>
+<span class="nc" id="L112">    	Expression actual = expression.simplify();</span>
+<span class="nc" id="L113">    	assertEquals(expected.toString(), actual.toString());</span>
+<span class="nc" id="L114">    }</span>
+    
+    
+    @Test
+    public void testMonomial5() {
+    	
+<span class="nc" id="L120">    	Utils.calcVariableCnt(&quot;2*a*b+3*a*b+0*b*c&quot;);</span>
+    	
+<span class="nc" id="L122">    	Monomial m0 = new Monomial(&quot;a&quot;); </span>
+<span class="nc" id="L123">    	Monomial m1 = new Monomial(&quot;b&quot;);</span>
+<span class="nc" id="L124">    	Monomial m2 = new Monomial(&quot;c&quot;);</span>
+    	  	
+<span class="nc" id="L126">    	expression = new Expression().addMonomial(m0).addMonomial(m1).addMonomial(m2);</span>
+    	
+    	
+    	
+<span class="nc" id="L130">    	Monomial mm0 = new Monomial(&quot;a&quot;); </span>
+<span class="nc" id="L131">    	Monomial mm1 = new Monomial(&quot;b&quot;);</span>
+<span class="nc" id="L132">    	Monomial mm2 = new Monomial(&quot;c&quot;);</span>
+    	
+<span class="nc" id="L134">    	Expression expected = new Expression().addMonomial(m0).addMonomial(m1).addMonomial(m2);</span>
+<span class="nc" id="L135">    	Expression actual = expression.simplify();</span>
+<span class="nc" id="L136">    	assertEquals(expected.toString(), actual.toString());</span>
+<span class="nc" id="L137">    }</span>
+    
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>TestWhite (2016-11-21 21:46:45)</div></body></html>

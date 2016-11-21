@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Expression.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestSimplify (2016-11-21 20:12:05)</a> &gt; <a href="../../index.html" class="el_group">Lab1</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">com.awesome</a> &gt; <span class="el_source">Expression.java</span></div><h1>Expression.java</h1><pre class="source lang-java linenums">package com.awesome;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Expression.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">TestWhite (2016-11-21 21:46:45)</a> &gt; <a href="../../index.html" class="el_group">Lab1</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">com.awesome</a> &gt; <span class="el_source">Expression.java</span></div><h1>Expression.java</h1><pre class="source lang-java linenums">package com.awesome;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,44 +37,44 @@ public class Expression
 
     public Expression simplify()	//多项式化简
     {
-<span class="fc" id="L40">	Expression combineRes = new Expression();</span>
-<span class="fc bfc" id="L41" title="All 2 branches covered.">	for (int i = 0; i &lt; exp.size(); i++)</span>
+<span class="nc" id="L40">	Expression combineRes = new Expression();</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">	for (int i = 0; i &lt; exp.size(); i++)</span>
 	{
-<span class="fc" id="L43">	    int hasCheckedCnt = combineRes.exp.size();</span>
-<span class="fc bfc" id="L44" title="All 2 branches covered.">	    if (hasCheckedCnt == 0)			//第一个单项式直接添加</span>
-<span class="fc" id="L45">		combineRes.addMonomial(exp.get(i));</span>
+<span class="nc" id="L43">	    int hasCheckedCnt = combineRes.exp.size();</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">	    if (hasCheckedCnt == 0)			//第一个单项式直接添加</span>
+<span class="nc" id="L45">		combineRes.addMonomial(exp.get(i));</span>
 	    else
 	    {
-<span class="fc" id="L48">		boolean compatible = false;			//两者是否可以合并同类项(即是否兼容)</span>
-<span class="fc bfc" id="L49" title="All 2 branches covered.">		for (int j = 0; j &lt; hasCheckedCnt; j++)</span>
+<span class="nc" id="L48">		boolean compatible = false;			//两者是否可以合并同类项(即是否兼容)</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">		for (int j = 0; j &lt; hasCheckedCnt; j++)</span>
 		{
-<span class="fc bfc" id="L51" title="All 2 branches covered.">		    if (exp.get(i).isCompatible(combineRes.exp.get(j)))</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		    if (exp.get(i).isCompatible(combineRes.exp.get(j)))</span>
 		    {
-<span class="fc" id="L53">			compatible = true;</span>
-<span class="fc" id="L54">			double C = exp.get(i).getC() + combineRes.exp.get(j).getC();</span>
-<span class="fc" id="L55">			combineRes.exp.get(j).setC(C);		//对应系数相加</span>
-<span class="fc" id="L56">			break;</span>
+<span class="nc" id="L53">			compatible = true;</span>
+<span class="nc" id="L54">			double C = exp.get(i).getC() + combineRes.exp.get(j).getC();</span>
+<span class="nc" id="L55">			combineRes.exp.get(j).setC(C);		//对应系数相加</span>
+<span class="nc" id="L56">			break;</span>
 		    }
 		}
-<span class="fc bfc" id="L59" title="All 2 branches covered.">		if(!compatible)</span>
-<span class="fc" id="L60">			combineRes.addMonomial(exp.get(i));</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">		if(!compatible)</span>
+<span class="nc" id="L60">			combineRes.addMonomial(exp.get(i));</span>
 	    }
 	}
 //	System.out.println(&quot;合并同类项之后&quot; + combineRes);
 //	System.out.println(combineRes.exp);
-<span class="fc" id="L65">	Expression simplifyZero = new Expression();		//把系数为0的单项式去掉</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">	for(int i=0;i&lt;combineRes.exp.size();i++)</span>
+<span class="nc" id="L65">	Expression simplifyZero = new Expression();		//把系数为0的单项式去掉</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">	for(int i=0;i&lt;combineRes.exp.size();i++)</span>
 	{
-<span class="fc bfc" id="L68" title="All 2 branches covered.">	    if(!Utils.doubleEquals(Math.abs(combineRes.exp.get(i).getC()),0.0))		//加abs()，防止出现-0不等于0!</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">	    if(!Utils.doubleEquals(Math.abs(combineRes.exp.get(i).getC()),0.0))		//加abs()，防止出现-0不等于0!</span>
 	    {
 //		System.out.println(combineRes.exp.get(i).getC()+&quot;不为0!&quot;);
-<span class="fc" id="L71">		simplifyZero.exp.add(combineRes.exp.get(i));</span>
+<span class="nc" id="L71">		simplifyZero.exp.add(combineRes.exp.get(i));</span>
 	    }
 	}
 //	System.out.println(&quot;去掉零之后&quot; + simplifyZero);
-<span class="fc bfc" id="L75" title="All 2 branches covered.">	if(simplifyZero.exp.size() == 0)</span>
-<span class="fc" id="L76">	    simplifyZero.exp.add(new Monomial(0));</span>
-<span class="fc" id="L77">	return simplifyZero;</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">	if(simplifyZero.exp.size() == 0)</span>
+<span class="nc" id="L76">	    simplifyZero.exp.add(new Monomial(0));</span>
+<span class="nc" id="L77">	return simplifyZero;</span>
     }
 
     public Expression multiply(Expression e)		//多项式乘以多项式
@@ -120,43 +120,44 @@ public class Expression
     
     public Expression derivative(String v)	//对变量v求导，每个单项式依次求导，再相加
     {
-<span class="nc" id="L123">	Expression expression = new Expression();</span>
-<span class="nc bnc" id="L124" title="All 2 branches missed.">	for(int i=0;i&lt;exp.size();i++)</span>
+<span class="fc" id="L123">	Expression expression = new Expression();</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">	for(int i=0;i&lt;exp.size();i++)</span>
 	{
-<span class="nc" id="L126">	    expression.addMonomial(exp.get(i).derivative(v));</span>
+<span class="fc" id="L126">	    expression.addMonomial(exp.get(i).derivative(v));</span>
 	}
-<span class="nc" id="L128">	return expression;</span>
+<span class="fc" id="L128">	return expression;</span>
     }
+    
     
     @Override
     public String toString()			//输出表达式
     {
-<span class="fc" id="L134">	StringBuffer sb = new StringBuffer();</span>
-<span class="fc bfc" id="L135" title="All 2 branches covered.">	for (int i = 0; i &lt; exp.size(); i++)</span>
+<span class="fc" id="L135">	StringBuffer sb = new StringBuffer();</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">	for (int i = 0; i &lt; exp.size(); i++)</span>
 	{
-<span class="fc" id="L137">	    Monomial monomial = exp.get(i);</span>
-<span class="fc bfc" id="L138" title="All 2 branches covered.">	    if (i == 0)</span>
-<span class="fc" id="L139">		sb.append(monomial);</span>
+<span class="fc" id="L138">	    Monomial monomial = exp.get(i);</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">	    if (i == 0)</span>
+<span class="fc" id="L140">		sb.append(monomial);</span>
 	    else
 	    {
-<span class="pc bpc" id="L142" title="1 of 2 branches missed.">		if(monomial.getC() &gt;= 0)</span>
-<span class="fc" id="L143">		    sb.append(&quot; + &quot; + monomial);</span>
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">		if(monomial.getC() &gt;= 0)</span>
+<span class="fc" id="L144">		    sb.append(&quot; + &quot; + monomial);</span>
 		else
 		{
-<span class="nc" id="L146">		    monomial.setC(-monomial.getC());		//把负系数的单项式打印成减法</span>
-<span class="nc" id="L147">		    sb.append(&quot; - &quot; + monomial);</span>
-<span class="nc" id="L148">		    monomial.setC(-monomial.getC());</span>
+<span class="nc" id="L147">		    monomial.setC(-monomial.getC());		//把负系数的单项式打印成减法</span>
+<span class="nc" id="L148">		    sb.append(&quot; - &quot; + monomial);</span>
+<span class="nc" id="L149">		    monomial.setC(-monomial.getC());</span>
 		}
 	    }
 	}
-<span class="fc" id="L152">	return sb.toString();</span>
+<span class="fc" id="L153">	return sb.toString();</span>
     }
 
     
     public static void main(String[] args)
     {
-<span class="nc" id="L158">	ExpressionTree.main(args);</span>
-<span class="nc" id="L159">    }</span>
+<span class="nc" id="L159">	ExpressionTree.main(args);</span>
+<span class="nc" id="L160">    }</span>
 
 }
 
@@ -172,90 +173,91 @@ public class Expression
  */
 class Monomial
 {
-<span class="fc" id="L175">    private double C = 1.0;		//系数默认为1, 支持实数，使用double</span>
-<span class="fc" id="L176">    private int[] times = new int[Utils.getVariableCnt()];</span>
+<span class="pc" id="L176">    private double C = 1.0;		//系数默认为1, 支持实数，使用double</span>
+<span class="pc" id="L177">    private int[] times = new int[Utils.getVariableCnt()];</span>
 
-<span class="fc" id="L178">    public Monomial() {}</span>
+<span class="fc" id="L179">    public Monomial() {}</span>
     
-<span class="fc" id="L180">    public Monomial(double C)		//以单个数字构造特殊的单项式(只有系数，没有变量出现)</span>
+<span class="nc" id="L181">    public Monomial(double C)		//以单个数字构造特殊的单项式(只有系数，没有变量出现)</span>
     {
-<span class="fc" id="L182">	this.C = C;</span>
-<span class="fc" id="L183">    }</span>
+<span class="nc" id="L183">	this.C = C;</span>
+<span class="nc" id="L184">    }</span>
     
-<span class="fc" id="L185">    public Monomial(String data)		//自动将字符串数据data转化为系数或者变量构成的单项式</span>
+<span class="fc" id="L186">    public Monomial(String data)		//自动将字符串数据data转化为系数或者变量构成的单项式</span>
     {
-<span class="fc bfc" id="L187" title="All 2 branches covered.">	if (Utils.isDouble(data))</span>
-<span class="fc" id="L188">	    C = Double.parseDouble(data);</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">	if (Utils.isDouble(data))</span>
+<span class="fc" id="L189">	    C = Double.parseDouble(data);</span>
 	else
-<span class="fc" id="L190">	    times[Utils.getVariableID(data)] = 1;</span>
-<span class="fc" id="L191">    }</span>
+<span class="fc" id="L191">	    times[Utils.getVariableID(data)] = 1;</span>
+<span class="fc" id="L192">    }</span>
     
     public double getC()
     {
-<span class="fc" id="L195">	return C;</span>
+<span class="fc" id="L196">	return C;</span>
     }
     
     public void setC(double C)
     {
-<span class="fc" id="L200">	this.C = C;</span>
-<span class="fc" id="L201">    }</span>
+<span class="nc" id="L201">	this.C = C;</span>
+<span class="nc" id="L202">    }</span>
 
     public boolean isCompatible(Monomial m)	//如果两个单项式times数组完全一致，说明它们对应变量的次数均相同，两者为同类项，可以合并
     {
-<span class="fc" id="L205">	return Arrays.equals(times, m.times);</span>
+<span class="nc" id="L206">	return Arrays.equals(times, m.times);</span>
     }
 
     public Monomial multiply(Monomial m)	//单项式乘法，系数相乘，对应变量指数相加
     {
-<span class="fc" id="L210">	Monomial product = new Monomial();</span>
-<span class="fc" id="L211">	product.C = C * m.C;</span>
-<span class="fc bfc" id="L212" title="All 2 branches covered.">	for (int i = 0; i &lt; times.length; i++)</span>
+<span class="fc" id="L211">	Monomial product = new Monomial();</span>
+<span class="fc" id="L212">	product.C = C * m.C;</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">	for (int i = 0; i &lt; times.length; i++)</span>
 	{
-<span class="fc" id="L214">	    product.times[i] = times[i] + m.times[i];</span>
+<span class="fc" id="L215">	    product.times[i] = times[i] + m.times[i];</span>
 	}
-<span class="fc" id="L216">	return product;</span>
+<span class="fc" id="L217">	return product;</span>
     }
     
     public Monomial derivative(String v)	//单项式对变量v求导，变量v的指数乘到系数，指数减1，
     {						//如果变量v不曾出现(指数为0)，则相当于对常数求导，结果为0,直接将系数置为0
-<span class="nc" id="L221">	Monomial monomial = new Monomial();</span>
-<span class="nc" id="L222">	int id = Utils.getVariableID(v);</span>
-<span class="nc bnc" id="L223" title="All 2 branches missed.">	if(times[id] &gt; 0)</span>
+<span class="fc" id="L222">	Monomial monomial = new Monomial();</span>
+<span class="fc" id="L223">	int id = Utils.getVariableID(v);</span>
+<span class="fc bfc" id="L224" title="All 2 branches covered.">	if(times[id] &gt; 0)</span>
 	{
-<span class="nc" id="L225">	    monomial.times = times.clone();</span>
-<span class="nc" id="L226">	    monomial.C = times[id] * C;</span>
-<span class="nc" id="L227">	    monomial.times[id]--;</span>
-<span class="nc" id="L228">	}</span>
+<span class="fc" id="L226">	    monomial.times = times.clone();</span>
+<span class="fc" id="L227">	    monomial.C = times[id] * C;</span>
+<span class="fc" id="L228">	    monomial.times[id]--;</span>
+<span class="fc" id="L229">	}</span>
 	else
 	{
-<span class="nc" id="L231">	    monomial.C = 0;</span>
+<span class="fc" id="L232">		System.out.println(times[id]);</span>
+<span class="fc" id="L233">	    monomial.C = 0;</span>
 	}
-<span class="nc" id="L233">	return monomial;</span>
+<span class="fc" id="L235">	return monomial;</span>
     }
     @Override
     public String toString()	//输出单项式
     {
-<span class="fc" id="L238">	StringBuffer sb = new StringBuffer();</span>
-<span class="fc" id="L239">	boolean first = true;</span>
-<span class="pc bpc" id="L240" title="1 of 2 branches missed.">	if(Utils.doubleEquals(C, -1.0))		//系数-1,只打印负号，省略1</span>
-<span class="nc" id="L241">	    sb.append(&quot;-&quot;);</span>
-<span class="fc bfc" id="L242" title="All 2 branches covered.">	else if (!Utils.doubleEquals(C, 1.0))	//系数1省略</span>
-<span class="fc" id="L243">	    sb.append(Utils.shortDouble(C));	//shortDouble，如果C小数部分为0,则显示为整数形式，这样更为美观简洁，否则显示为小数形式</span>
-<span class="fc bfc" id="L244" title="All 2 branches covered.">	for (int i = 0; i &lt; times.length; i++)</span>
+<span class="fc" id="L240">	StringBuffer sb = new StringBuffer();</span>
+<span class="fc" id="L241">	boolean first = true;</span>
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">	if(Utils.doubleEquals(C, -1.0))		//系数-1,只打印负号，省略1</span>
+<span class="nc" id="L243">	    sb.append(&quot;-&quot;);</span>
+<span class="pc bpc" id="L244" title="1 of 2 branches missed.">	else if (!Utils.doubleEquals(C, 1.0))	//系数1省略</span>
+<span class="fc" id="L245">	    sb.append(Utils.shortDouble(C));	//shortDouble，如果C小数部分为0,则显示为整数形式，这样更为美观简洁，否则显示为小数形式</span>
+<span class="fc bfc" id="L246" title="All 2 branches covered.">	for (int i = 0; i &lt; times.length; i++)</span>
 	{
-<span class="fc bfc" id="L246" title="All 2 branches covered.">	    if (times[i] != 0)</span>
+<span class="fc bfc" id="L248" title="All 2 branches covered.">	    if (times[i] != 0)</span>
 	    {
-<span class="fc bfc" id="L248" title="All 2 branches covered.">		if (first)	//第一个变量省略乘号*</span>
+<span class="pc bpc" id="L250" title="1 of 2 branches missed.">		if (first)	//第一个变量省略乘号*</span>
 		{
-<span class="fc" id="L250">		    first = false;</span>
-<span class="pc bpc" id="L251" title="1 of 2 branches missed.">		    sb.append(Utils.getVariableFromID(i)+(times[i]!=1?&quot;^&quot;+times[i]:&quot;&quot;));</span>
-<span class="fc" id="L252">		}</span>
+<span class="fc" id="L252">		    first = false;</span>
+<span class="pc bpc" id="L253" title="1 of 2 branches missed.">		    sb.append(Utils.getVariableFromID(i)+(times[i]!=1?&quot;^&quot;+times[i]:&quot;&quot;));</span>
+<span class="fc" id="L254">		}</span>
 		else
-<span class="pc bpc" id="L254" title="1 of 2 branches missed.">		    sb.append(&quot;*&quot; + Utils.getVariableFromID(i)+(times[i]!=1?&quot;^&quot;+times[i]:&quot;&quot;));</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">		    sb.append(&quot;*&quot; + Utils.getVariableFromID(i)+(times[i]!=1?&quot;^&quot;+times[i]:&quot;&quot;));</span>
 	    }
 	}
-<span class="pc bpc" id="L257" title="1 of 4 branches missed.">	if(first &amp;&amp; Utils.doubleEquals(Math.abs(C), 1.0)) sb.append(Utils.shortDouble(Math.abs(C)));	//如果只有一个1,则不该省略1,进行纠正</span>
-<span class="fc" id="L258">	return sb.toString();</span>
+<span class="pc bpc" id="L259" title="1 of 4 branches missed.">	if(first &amp;&amp; Utils.doubleEquals(Math.abs(C), 1.0)) sb.append(Utils.shortDouble(Math.abs(C)));	//如果只有一个1,则不该省略1,进行纠正</span>
+<span class="fc" id="L260">	return sb.toString();</span>
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>TestSimplify (2016-11-21 20:12:05)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span>TestWhite (2016-11-21 21:46:45)</div></body></html>
